@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: helm-keycloak
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  destination:
+    namespace: helm-keycloak
+    server: {{ .Values.spec.destination.server }}
+  project: default
+  source:
+    path: keycloak
+    repoURL: https://github.com/codecentric/helm-charts/tree/master/charts
+    targetRevision: 9.3.0
